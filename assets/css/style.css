@@ -1,1 +1,26 @@
+/* ========================================================
+VARIABLES/COLORS
+======================================================== */
 
+:root{
+
+--bg-main:#0f0f0f;
+  --bg-section#151515;
+  --bg-card:#1c1c1c;
+
+--text-primary:#ffffff;
+  --text-secondary:#a0a0a0;
+
+--accent:#2f4f4f;
+  --accent-hover:#1f3a3a
+
+--bg-main-light:#f3eee6;
+  --bg-section-light:#e0d6c5;
+  --bg-card-light:#ffffff;
+
+--text-primary-light:#1a1a1a;
+  --text-secondary-light:#555;
+
+--font-main:'Space Grotesk',sans-serif;
+
+}
