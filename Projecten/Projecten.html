@@ -30,31 +30,38 @@
             
             <div class="controls-container">
                 <div class="glass-panel" id="filter-group">
-                    <button class="f-btn active" data-filter="all">All</button>
-                    <button class="f-btn" data-filter="jaar1">Year 1</button>
-                    <button class="f-btn" data-filter="jaar2">Year 2</button>
-                    <button class="f-btn" data-filter="video">Motion</button>
-                    <button class="f-btn" data-filter="foto">Stills</button>
+                    <button class="f-btn active" data-filter="all">Alles</button>
+                    <button class="f-btn" data-filter="jaar1">Leerjaar 1</button>
+                    <button class="f-btn" data-filter="jaar2">Leerjaar 2</button>
+                    <button class="f-btn" data-filter="jaar3">Leerjaar 3</button>
+                    <button class="f-btn" data-filter="jaar4">Leerjaar 4</button>
+                    <button class="f-btn" data-filter="video">Video</button>
+                    <button class="f-btn" data-filter="foto">Fotografie</button>
                 </div>
 
                 <div class="sort-wrapper">
                     <select id="sort-order" class="premium-select">
-                        <option value="newest">Recent</option>
-                        <option value="oldest">Archive</option>
+                        <option value="newest">Recentste eerst</option>
+                        <option value="oldest">Oudste eerst</option>
                     </select>
                 </div>
             </div>
         </header>
 
+        <div id="empty-message">
+            <p>Oeps! Hier staat nog niets.</p>
+            <span>Kies een van de andere filters om mijn projecten te zien.</span>
+        </div>
+
         <div class="project-grid" id="grid">
-            <div class="card jaar1 Mallete" data-date="2025-06-26">
+            <div class="card jaar1 video reveal" data-date="2025-06-26">
                 <a href="project1.html">
                     <div class="image-wrapper">
-                        <img src="../assets/images/Thumbnails/Jaar1/Mallete.jpg" alt="Project 1" loading="lazy">
+                        <img src="../assets/images/Thumbnails/Jaar1/Mallete.jpg" alt="Mallete" loading="lazy">
                     </div>
                     <div class="overlay">
                         <div class="overlay-content">
-                            <p class="category">Motion / Year 1</p>
+                            <p class="category">Motion / Leerjaar 1</p>
                             <h3>Mallete</h3>
                             <div class="line"></div>
                         </div>
@@ -65,11 +72,11 @@
             <div class="card jaar2 foto reveal" data-date="2025-01-20">
                 <a href="project2.html">
                     <div class="image-wrapper">
-                        <img src="../assets/images/thumb2.jpg" alt="Project 2" loading="lazy">
+                        <img src="../assets/images/thumb2.jpg" alt="Studio Portraits" loading="lazy">
                     </div>
                     <div class="overlay">
                         <div class="overlay-content">
-                            <p class="category">Photography / Year 2</p>
+                            <p class="category">Fotografie / Leerjaar 2</p>
                             <h3>Studio Portraits</h3>
                             <div class="line"></div>
                         </div>
@@ -85,10 +92,12 @@
 
     <script>
         const buttons = document.querySelectorAll('.f-btn');
-        const cards = document.querySelectorAll('.card');
+        const cardsContainer = document.getElementById('grid');
+        const emptyMessage = document.getElementById('empty-message');
+        const sortSelect = document.getElementById('sort-order');
         let activeFilters = new Set(['all']);
 
-        // Filter Logic
+        // --- FILTER LOGICA ---
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const filter = btn.dataset.filter;
@@ -117,19 +126,46 @@
         });
 
         function updateDisplay() {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            let visibleCount = 0;
+
             cards.forEach(card => {
                 const categories = Array.from(card.classList);
                 const shouldShow = activeFilters.has('all') || 
                                    Array.from(activeFilters).some(f => categories.includes(f));
-                card.style.opacity = shouldShow ? '1' : '0';
-                card.style.transform = shouldShow ? 'translateY(0)' : 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.display = shouldShow ? 'block' : 'none';
-                }, 400);
+                
+                if (shouldShow) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                    visibleCount++;
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => { card.style.display = 'none'; }, 400);
+                }
             });
+
+            emptyMessage.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
 
-        // Reveal on Scroll
+        // --- SORTEER LOGICA ---
+        sortSelect.addEventListener('change', () => {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const isNewest = sortSelect.value === 'newest';
+
+            cards.sort((a, b) => {
+                const dateA = new Date(a.dataset.date);
+                const dateB = new Date(b.dataset.date);
+                return isNewest ? dateB - dateA : dateA - dateB;
+            });
+
+            cards.forEach(card => cardsContainer.appendChild(card));
+        });
+
+        // --- REVEAL ON SCROLL ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -138,7 +174,7 @@
             });
         }, { threshold: 0.1 });
 
-        cards.forEach(card => observer.observe(card));
+        document.querySelectorAll('.card').forEach(card => observer.observe(card));
     </script>
 </body>
 </html>
