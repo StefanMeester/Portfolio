@@ -1,495 +1,344 @@
 /* ========================================================
-VARIABLES/COLORS
-======================================================== */
+   1. VARIABLES & COLORS
+   ======================================================== */
+:root {
+    /* Dark Mode (Default) */
+    --bg-main: #0f0f0f;
+    --bg-section: #151515;
+    --bg-card: #1c1c1c;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #2f4f4f;
+    --accent-hover: #1f3a3a;
 
-:root{
+    /* Light Mode */
+    --bg-main-light: #f3eee6;
+    --bg-section-light: #e0d6c5;
+    --bg-card-light: #ffffff;
+    --text-primary-light: #1a1a1a;
+    --text-secondary-light: #555;
 
---bg-main:#0f0f0f;
-  --bg-section#151515;
-  --bg-card:#1c1c1c;
-
---text-primary:#ffffff;
-  --text-secondary:#a0a0a0;
-
---accent:#2f4f4f;
-  --accent-hover:#1f3a3a
-
---bg-main-light:#f3eee6;
-  --bg-section-light:#e0d6c5;
-  --bg-card-light:#ffffff;
-
---text-primary-light:#1a1a1a;
-  --text-secondary-light:#555;
-
---font-main:'Space Grotesk',sans-serif;
-
+    --font-main: 'Space Grotesk', sans-serif;
+    --nav-height: 80px; /* Hoogte van je navbar voor berekeningen */
 }
 
-/* ==============================
-   GLOBAL
-============================== */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:var(--font-main);
+/* ========================================================
+   2. GLOBAL SETTINGS
+   ======================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
 }
 
-body{
-background:var(--bg-main);
-color:var(--text-primary);
-line-height:1.6;
-transition:background .3s,color .3s;
+body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+    padding-top: var(--nav-height); /* Zorgt dat content onder de nav begint */
 }
 
-body.light-mode{
-background:var(--bg-main-light);
-color:var(--text-primary-light);
+body.light-mode {
+    background: var(--bg-main-light);
+    color: var(--text-primary-light);
 }
 
-img{
-max-width:100%;
-display:block;
+img {
+    max-width: 100%;
+    display: block;
 }
 
-/* ==============================
-   NAVBAR
-============================== */
-
-.navbar{
-
-position:fixed;
-top:0;
-width:100%;
-z-index:1000;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:18px 6%;
-
-backdrop-filter:blur(14px);
-background:rgba(15,15,15,.85);
-
+/* ========================================================
+   3. NAVBAR
+   ======================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6%;
+    backdrop-filter: blur(14px);
+    background: rgba(15, 15, 15, 0.85);
 }
 
-body.light-mode .navbar{
-background:rgba(243,238,230,.95);
+body.light-mode .navbar {
+    background: rgba(243, 238, 230, 0.95);
 }
 
-.navbar ul{
-
-list-style:none;
-display:flex;
-align-items:center;
-gap:30px;
-
+.navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
-.navbar a{
-
-text-decoration:none;
-font-weight:600;
-font-size:16px;
-color:var(--text-primary);
-position:relative;
-
+.navbar a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-primary);
+    position: relative;
 }
 
-body.light-mode .navbar a{
-color:var(--text-primary-light);
+body.light-mode .navbar a {
+    color: var(--text-primary-light);
 }
 
-.navbar a::after{
-
-content:"";
-position:absolute;
-bottom:-4px;
-left:0;
-
-width:0;
-height:2px;
-
-background:var(--accent);
-transition:.3s;
-
+.navbar a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: 0.3s;
 }
 
-.navbar a:hover::after{
-width:100%;
+.navbar a:hover::after {
+    width: 100%;
 }
 
-.logo img{
-height:36px;
+.logo img {
+    height: 36px;
 }
 
-body.light-mode .logo img{
-filter:brightness(0);
+body.light-mode .logo img {
+    filter: brightness(0);
 }
 
-/* ==============================
-   HERO
-============================== */
-
-.hero{
-
-min-height:100vh;
-display:flex;
-align-items:center;
-
-padding-left:10%;
-padding-right:30vw;
-
-position:relative;
-overflow:hidden;
-
-background:
-radial-gradient(circle at 30% 40%,rgba(47,79,79,.35),transparent 55%),
-radial-gradient(circle at 75% 65%,rgba(26,46,37,.30),transparent 60%),
-linear-gradient(180deg,#0f0f0f 0%,#111 50%,#141414 100%);
-
-background-size:180% 180%;
-
-animation:gradientMove 28s ease infinite alternate;
-
+/* ========================================================
+   4. HERO SECTION
+   ======================================================== */
+.hero {
+    min-height: calc(100vh - var(--nav-height));
+    display: flex;
+    align-items: center;
+    padding: 0 10% 0 10%;
+    position: relative;
+    overflow: hidden;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(47, 79, 79, 0.35), transparent 55%),
+        radial-gradient(circle at 75% 65%, rgba(26, 46, 37, 0.30), transparent 60%),
+        linear-gradient(180deg, #0f0f0f 0%, #111 50%, #141414 100%);
+    background-size: 180% 180%;
+    animation: gradientMove 28s ease infinite alternate;
 }
 
-body.light-mode .hero{
-
-background:
-radial-gradient(circle at 30% 40%,rgba(162,140,110,.35),transparent 55%),
-radial-gradient(circle at 75% 65%,rgba(180,160,130,.35),transparent 60%),
-linear-gradient(180deg,#f3eee6 0%,#e2d6c1 50%,#d8cbb2 100%);
-
+body.light-mode .hero {
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(162, 140, 110, 0.35), transparent 55%),
+        radial-gradient(circle at 75% 65%, rgba(180, 160, 130, 0.35), transparent 60%),
+        linear-gradient(180deg, #f3eee6 0%, #e2d6c1 50%, #d8cbb2 100%);
 }
 
-.hero-content{
-
-max-width:700px;
-
-display:flex;
-flex-direction:column;
-gap:20px;
-
+.hero-content {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.hero h1{
-
-font-size:64px;
-font-weight:700;
-letter-spacing:-1px;
-
+.hero h1 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
-.hero p{
-
-font-size:22px;
-color:var(--text-secondary);
-
+.hero p {
+    font-size: 22px;
+    color: var(--text-secondary);
 }
 
-body.light-mode .hero p{
-color:var(--text-secondary-light);
+body.light-mode .hero p {
+    color: var(--text-secondary-light);
 }
 
-.btn{
-
-display:inline-block;
-padding:12px 28px;
-
-background:var(--accent);
-color:#fff;
-
-text-decoration:none;
-font-weight:600;
-border-radius:6px;
-
-transition:.3s;
-
-}
-
-.btn:hover{
-background:var(--accent-hover);
-}
-
-/* ==============================
-   GRADIENT ANIMATION
-============================== */
-
-@keyframes gradientMove{
-
-0%{background-position:0% 40%;}
-100%{background-position:100% 60%;}
-
-}
-
-/* ==============================
-   FOOTER
-============================== */
-
-footer{
-
-padding:30px;
-text-align:center;
-font-size:14px;
-
-background:var(--bg-section);
-color:var(--text-secondary);
-
-}
-
-body.light-mode footer{
-
-background:var(--bg-section-light);
-color:var(--text-secondary-light);
-
-}
-
-/* ==============================
-   WIP – CINEMATIC
-============================== */
-
-.wip{
-
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-
-text-align:center;
-
-padding-top:80px;
-
-position:relative;
-
-}
-
-/* subtle film fade background */
-.wip::before{
-
-content:"";
-position:absolute;
-inset:0;
-
-background:radial-gradient(circle at center,rgba(255,255,255,0.05),transparent 70%);
-
-opacity:.4;
-
-}
-
-/* content */
-.wip-content{
-
-z-index:2;
-
-animation:fadeCinematic 1.5s ease forwards;
-
-}
-
-/* small label */
-.wip-label{
-
-font-size:12px;
-letter-spacing:3px;
-text-transform:uppercase;
-
-color:var(--text-secondary);
-
-margin-bottom:10px;
-
-}
-
-/* main title */
-.wip h1{
-
-font-size:56px;
-font-weight:700;
-
-letter-spacing:2px;
-
-margin-bottom:15px;
-
-}
-
-/* subtitle */
-.wip-sub{
-
-font-size:18px;
-color:var(--text-secondary);
-
-margin-bottom:30px;
-
-}
-
-body.light-mode .wip-sub{
-color:var(--text-secondary-light);
-}
-
-/* cinematic line */
-.wip-line{
-
-width:120px;
-height:2px;
-
-margin:20px auto;
-
-background:var(--accent);
-
-animation:lineGrow 1.5s ease forwards;
-
-}
-
-/* animations */
-@keyframes fadeCinematic{
-
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-@keyframes lineGrow{
-
-from{
-width:0;
-opacity:0;
-}
-
-to{
-width:120px;
-opacity:1;
-}
-
-}
-/* fake loading bar */
-
-.wip-loader{
-
-width:200px;
-height:2px;
-
-background:rgba(255,255,255,0.2);
-
-margin:25px auto;
-position:relative;
-overflow:hidden;
-
-}
-
-.wip-loader::after{
-
-content:"";
-position:absolute;
-
-height:100%;
-width:40%;
-
-background:var(--accent);
-
-animation:loadingMove 1.5s infinite;
-
-}
-
-@keyframes loadingMove{
-
-0%{ left:-40%; }
-100%{ left:100%; }
-
-}
-
-/* Verberg alles standaard */
-.filterDiv {
-  display: none; 
-}
-
-/* De 'show' class die we met JS gaan toevoegen */
-.show {
-  display: block;
-}
-
-/* Een beetje styling voor de knoppen */
+/* Algemene Knoppen */
 .btn {
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  background-color: #f1f1f1;
-  cursor: pointer;
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
-  background-color: #ddd;
+    background: var(--accent-hover);
 }
 
-.btn.active {
-  background-color: #666;
-  color: white;
-}
-.controls-container {
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 20px;
-margin-bottom: 40px;
-flex-wrap: wrap;
-}
-.f-btn {
-border: 1.5px solid #333;
-background: none;
-padding: 6px 18px;
-border-radius: 30px; /* Ovaal effect */
-font-size: 14px;
-cursor: pointer;
-transition: 0.3s;
-}
-.f-btn.active {
-background-color: #333;
-color: white;
-}
-.project-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-gap: 20px;
-padding: 0 20px;
-}
-.card {
-position: relative;
-aspect-ratio: 4 / 3; /* Rechthoekig */
-border-radius: 12px; /* Ronde hoeken */
-
-overflow: hidden;
-cursor: pointer;
-}
-.card img {
-width: 100%;
-height: 100%;
-object-fit: cover; /* Vult het hele vak */
-}
-.overlay {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-background: rgba(0,0,0,0.5);
-display: flex; justify-content: center; align-items: center;
-opacity: 0; transition: 0.3s;
-color: white; font-weight: bold;
-}
-.card:hover .overlay { opacity: 1; }
+/* ========================================================
+   5. PORTFOLIO & FILTER SYSTEEM
+   ======================================================== */
 #portfolio-section {
-    margin-top: 100px; /* Pas dit getal aan aan de hoogte van je navigatiebalk */
-    padding-top: 20px;
+    padding: 60px 6%;
+}
+
+#portfolio-section h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 42px;
 }
 
 .controls-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-top: 20px; /* Extra ruimte onder je titel "Projecten" */
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+/* Ovale Filter Knoppen */
+.f-btn {
+    border: 1.5px solid var(--text-secondary);
+    background: transparent;
+    color: var(--text-primary);
+    padding: 8px 22px;
+    border-radius: 50px; /* Ovaal */
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s all ease;
+}
+
+body.light-mode .f-btn {
+    color: var(--text-primary-light);
+    border-color: var(--text-secondary-light);
+}
+
+.f-btn.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+.f-btn:hover {
+    background-color: rgba(47, 79, 79, 0.2);
+}
+
+/* Grid Layout */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* Project Cards */
+.card {
+    position: relative;
+    aspect-ratio: 16 / 9; /* Mooie breedbeeld verhouding */
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--bg-card);
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Vult de kaart volledig */
+    transition: transform 0.5s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05); /* Subtiele zoom bij hover */
+}
+
+/* Titel Overlay op de kaart */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+.overlay span {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+/* ========================================================
+   6. ANIMATIES & OVERIGE (WIP, FOOTER)
+   ======================================================== */
+@keyframes gradientMove {
+    0% { background-position: 0% 40%; }
+    100% { background-position: 100% 60%; }
+}
+
+footer {
+    padding: 40px;
+    text-align: center;
+    font-size: 14px;
+    background: var(--bg-section);
+    color: var(--text-secondary);
+}
+
+body.light-mode footer {
+    background: var(--bg-section-light);
+    color: var(--text-secondary-light);
+}
+
+/* WIP / Cinematic Sectie */
+.wip {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.wip-content { z-index: 2; animation: fadeCinematic 1.5s ease forwards; }
+
+@keyframes fadeCinematic {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Fake loading bar animatie */
+.wip-loader {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 25px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.wip-loader::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    background: var(--accent);
+    animation: loadingMove 1.5s infinite;
+}
+
+@keyframes loadingMove {
+    0% { left: -40%; }
+    100% { left: 100%; }
 }
