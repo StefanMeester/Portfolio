@@ -63,6 +63,22 @@
 <footer>
 © Stefan Meester 2026
 </footer>
+  
+filterSelection("all") // Laat alles zien bij het opstarten
 
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  
+  for (i = 0; i < x.length; i++) {
+    // Verwijder de "show" class van alle elementen
+    x[i].classList.remove("show");
+    // Voeg "show" alleen toe als de class overeenkomt met het filter
+    if (x[i].className.indexOf(c) > -1) {
+      x[i].classList.add("show");
+    }
+  }
+}
 </body>
 </html>
