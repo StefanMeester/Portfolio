@@ -29,36 +29,38 @@
 </ul>
 </nav>
 
-</header>
-
-</section>
-
-<div id="filter-buttons">
-  <button class="btn active" onclick="filterSelection('all')">Alles</button>
-  <button class="btn" onclick="filterSelection('jaar1')">Jaar 1</button>
-  <button class="btn" onclick="filterSelection('jaar2')">Jaar 2</button>
-  <button class="btn" onclick="filterSelection('video')">Video</button>
-  <button class="btn" onclick="filterSelection('foto')">Fotografie</button>
-</div>  
-
-  <div class="container">
-  <div class="filterDiv jaar1 video">
-    <img src="thumb1.jpg" alt="Video Project">
-    <p>Mijn Eerste Video (Jaar 1)</p>
-  </div>
-
-  <div class="filterDiv jaar2 foto">
-    <img src="thumb2.jpg" alt="Foto Project">
-    <p>Portret Serie (Jaar 2)</p>
-  </div>
-  
-  </div>
-  
-<a href="../index.html" class="btn">Back to home</a>
-
+<section id="portfolio-section">
+<h1 style="text-align:center;">Projecten</h1>
+<div class="controls-container">
+<!-- De Filter Knoppen -->
+<div id="filter-group">
+<button class="f-btn active" data-filter="all">Alles</button>
+<button class="f-btn" data-filter="jaar1">Jaar 1</button>
+<button class="f-btn" data-filter="jaar2">Jaar 2</button>
+<button class="f-btn" data-filter="video">Video</button>
+<button class="f-btn" data-filter="foto">Foto</button>
 </div>
-
-</section>
+<!-- Sorteer Menu -->
+<div id="sort-group">
+<select id="sort-order">
+<option value="newest">Nieuw naar Oud</option>
+<option value="oldest">Oud naar Nieuw</option>
+</select>
+</div>
+</div>
+<!-- Het Grid van Projecten -->
+<div class="project-grid" id="grid">
+<!-- Een Project Kaart -->
+<div class="card jaar1 video" data-date="2024-05-10">
+ <a href="project1.html">
+<img src="jouw-foto.jpg" alt="Project Titel">
+<div class="overlay">
+<span>Mijn Eerste Film</span>
+</div>
+</a>
+</div>
+</div>
+</section> 
 
 <footer>
 © Stefan Meester 2026
