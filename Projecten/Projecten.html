@@ -91,90 +91,99 @@
     </footer>
 
     <script>
-        const buttons = document.querySelectorAll('.f-btn');
-        const cardsContainer = document.getElementById('grid');
-        const emptyMessage = document.getElementById('empty-message');
-        const sortSelect = document.getElementById('sort-order');
-        let activeFilters = new Set(['all']);
+    const buttons = document.querySelectorAll('.f-btn');
+    const cardsContainer = document.getElementById('grid');
+    const emptyMessage = document.getElementById('empty-message');
+    const sortSelect = document.getElementById('sort-order');
+    let activeFilters = new Set(['all']);
 
-        // --- FILTER LOGICA ---
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.dataset.filter;
-                if (filter === 'all') {
-                    activeFilters.clear();
-                    activeFilters.add('all');
-                    buttons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
+    // --- FILTER LOGICA ---
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            if (filter === 'all') {
+                activeFilters.clear();
+                activeFilters.add('all');
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            } else {
+                activeFilters.delete('all');
+                const allBtn = document.querySelector('[data-filter="all"]');
+                if(allBtn) allBtn.classList.remove('active');
+                
+                if (activeFilters.has(filter)) {
+                    activeFilters.delete(filter);
+                    btn.classList.remove('active');
                 } else {
-                    activeFilters.delete('all');
-                    document.querySelector('[data-filter="all"]').classList.remove('active');
-                    if (activeFilters.has(filter)) {
-                        activeFilters.delete(filter);
-                        btn.classList.remove('active');
-                    } else {
-                        activeFilters.add(filter);
-                        btn.classList.add('active');
-                    }
+                    activeFilters.add(filter);
+                    btn.classList.add('active');
                 }
-                if (activeFilters.size === 0) {
-                    activeFilters.add('all');
-                    document.querySelector('[data-filter="all"]').classList.add('active');
-                }
-                updateDisplay();
-            });
+            }
+            if (activeFilters.size === 0) {
+                activeFilters.add('all');
+                const allBtn = document.querySelector('[data-filter="all"]');
+                if(allBtn) allBtn.classList.add('active');
+            }
+            updateDisplay();
+        });
+    });
+
+    function updateDisplay() {
+        const cards = Array.from(document.querySelectorAll('.card'));
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const categories = Array.from(card.classList);
+            const shouldShow = activeFilters.has('all') || 
+                               Array.from(activeFilters).some(f => categories.includes(f));
+            
+            if (shouldShow) {
+                card.style.display = 'block';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 10);
+                visibleCount++;
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => { card.style.display = 'none'; }, 400);
+            }
         });
 
-        function updateDisplay() {
-            const cards = Array.from(document.querySelectorAll('.card'));
-            let visibleCount = 0;
-
-            cards.forEach(card => {
-                const categories = Array.from(card.classList);
-                const shouldShow = activeFilters.has('all') || 
-                                   Array.from(activeFilters).some(f => categories.includes(f));
-                
-                if (shouldShow) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 10);
-                    visibleCount++;
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => { card.style.display = 'none'; }, 400);
-                }
-            });
-
+        if(emptyMessage) {
             emptyMessage.style.display = (visibleCount === 0) ? 'block' : 'none';
         }
+    }
 
-        // --- SORTEER LOGICA ---
+    // --- SORTEER LOGICA ---
+    if(sortSelect) {
         sortSelect.addEventListener('change', () => {
             const cards = Array.from(document.querySelectorAll('.card'));
             const isNewest = sortSelect.value === 'newest';
 
             cards.sort((a, b) => {
-                const dateA = new Date(a.dataset.date);
-                const dateB = new Date(b.dataset.date);
+                const dateA = new Date(a.dataset.date || 0);
+                const dateB = new Date(b.dataset.date || 0);
                 return isNewest ? dateB - dateA : dateA - dateB;
             });
 
             cards.forEach(card => cardsContainer.appendChild(card));
         });
+    }
 
-        // --- REVEAL ON SCROLL ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+    // --- REVEAL ON SCROLL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
 
-        document.querySelectorAll('.card').forEach(card => observer.observe(card));
-    </script>
+    // Deze regel was je vergeten en is cruciaal voor de animaties:
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
+</script>
+
 </body>
 </html>
