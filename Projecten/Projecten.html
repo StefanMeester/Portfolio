@@ -65,7 +65,8 @@
 <footer>
 © Stefan Meester 2026
 </footer>
-  
+
+<script>
 filterSelection("all") // Laat alles zien bij het opstarten
 
 function filterSelection(c) {
@@ -121,5 +122,6 @@ Array.from(activeFilters).some(f => categories.includes(f));
 card.style.display = match ? 'block' : 'none';
 });
 }
+</script>
 </body>
 </html>
