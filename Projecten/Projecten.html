@@ -82,5 +82,44 @@ function filterSelection(c) {
     }
   }
 }
+   const buttons = document.querySelectorAll('.f-btn');
+const grid = document.getElementById('grid');
+let activeFilters = new Set(['all']);
+buttons.forEach(btn => {
+btn.addEventListener('click', () => {
+const filter = btn.dataset.filter;
+if (filter === 'all') {
+activeFilters.clear();
+activeFilters.add('all');
+buttons.forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+} else {
+activeFilters.delete('all');
+document.querySelector('[data-filter="all"]').classList.remove('active');
+if (activeFilters.has(filter)) {
+activeFilters.delete(filter);
+btn.classList.remove('active');
+} else {
+activeFilters.add(filter);
+btn.classList.add('active');
+}
+
+}
+if (activeFilters.size === 0) {
+activeFilters.add('all');
+document.querySelector('[data-filter="all"]').classList.add('active');
+}
+render();
+});
+});
+function render() {
+const cards = Array.from(document.querySelectorAll('.card'));
+cards.forEach(card => {
+const categories = Array.from(card.classList);
+const match = activeFilters.has('all') ||
+Array.from(activeFilters).some(f => categories.includes(f));
+card.style.display = match ? 'block' : 'none';
+});
+}
 </body>
 </html>
