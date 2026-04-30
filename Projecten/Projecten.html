@@ -1,128 +1,189 @@
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Projecten | Stefan Meester</title>
-
-<link rel="stylesheet" href="../assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work | Stefan Meester</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header class="navbar">
+    <header class="navbar">
+        <div class="logo">
+            <a href="../index.html"><img src="../assets/images/logo/logozwart.png" alt="Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="Projecten.html" class="active">Work</a></li>
+                <li><a href="../overig/about.html">About</a></li>
+                <li><a href="../overig/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="logo">
-<a href="../index.html">
-<img src="../assets/images/logo/logozwart.png" alt="Logo">
-</a>
-</div>
+    <main id="portfolio-section">
+        <header class="portfolio-header">
+            <span class="sub-title">Selected Works</span>
+            <h1>Portfolio</h1>
+            
+            <div class="controls-container">
+                <div class="glass-panel" id="filter-group">
+                    <button class="f-btn active" data-filter="all">Alles</button>
+                    <button class="f-btn" data-filter="jaar1">Leerjaar 1</button>
+                    <button class="f-btn" data-filter="jaar2">Leerjaar 2</button>
+                    <button class="f-btn" data-filter="jaar3">Leerjaar 3</button>
+                    <button class="f-btn" data-filter="jaar4">Leerjaar 4</button>
+                    <button class="f-btn" data-filter="video">Video</button>
+                    <button class="f-btn" data-filter="foto">Fotografie</button>
+                </div>
 
-<nav>
-<ul>
-<li><a href="../index.html">Home</a></li>
-<li><a href="../Projecten/Projecten.html" data-i18n="nav_Projecten">Projecten</a></li>
-<li><a href="../overig/about.html">About</a></li>
-<li><a href="../overig/contact.html">Contact</a></li>
-</ul>
-</nav>
-</header>
- 
-<section id="portfolio-section">
-<h1 style="text-align:center;">Projecten</h1>
-<div class="controls-container">
-<!-- De Filter Knoppen -->
-<div id="filter-group">
-<button class="f-btn active" data-filter="all">Alles</button>
-<button class="f-btn" data-filter="jaar1">Jaar 1</button>
-<button class="f-btn" data-filter="jaar2">Jaar 2</button>
-<button class="f-btn" data-filter="video">Video</button>
-<button class="f-btn" data-filter="foto">Foto</button>
-</div>
-<!-- Sorteer Menu -->
-<div id="sort-group">
-<select id="sort-order">
-<option value="newest">Nieuw naar Oud</option>
-<option value="oldest">Oud naar Nieuw</option>
-</select>
-</div>
-</div>
-<!-- Het Grid van Projecten -->
-<div class="project-grid" id="grid">
-<!-- Een Project Kaart -->
-<div class="card jaar1 video" data-date="2024-05-10">
- <a href="project1.html">
-<img src="jouw-foto.jpg" alt="Project Titel">
-<div class="overlay">
-<span>Project is being crafted</span>
-</div>
-</a>
-</div>
-</div>
-</section> 
+                <div class="sort-wrapper">
+                    <select id="sort-order" class="premium-select">
+                        <option value="newest">Recentste eerst</option>
+                        <option value="oldest">Oudste eerst</option>
+                    </select>
+                </div>
+            </div>
+        </header>
 
-<footer>
-© Stefan Meester 2026
-</footer>
+        <div id="empty-message">
+            <p>Oeps! Hier staat nog niets.</p>
+            <span>Kies een van de andere filters om mijn projecten te zien.</span>
+        </div>
 
-<script>
-filterSelection("all") // Laat alles zien bij het opstarten
+        <div class="project-grid" id="grid">
+            <div class="card jaar1 video reveal" data-date="2025-06-26">
+                <a href="project1.html">
+                    <div class="image-wrapper">
+                        <img src="../assets/images/Thumbnails/Jaar1/Mallete.jpg" alt="Mallete" loading="lazy">
+                    </div>
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <p class="category">Motion / Leerjaar 1</p>
+                            <h3>Mallete</h3>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("filterDiv");
-  if (c == "all") c = "";
-  
-  for (i = 0; i < x.length; i++) {
-    // Verwijder de "show" class van alle elementen
-    x[i].classList.remove("show");
-    // Voeg "show" alleen toe als de class overeenkomt met het filter
-    if (x[i].className.indexOf(c) > -1) {
-      x[i].classList.add("show");
+            <div class="card jaar2 foto reveal" data-date="2025-01-20">
+                <a href="project2.html">
+                    <div class="image-wrapper">
+                        <img src="../assets/images/thumb2.jpg" alt="Studio Portraits" loading="lazy">
+                    </div>
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <p class="category">Fotografie / Leerjaar 2</p>
+                            <h3>Studio Portraits</h3>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 Stefan Meester — Av-Specialist</p>
+    </footer>
+
+    <script>
+    const buttons = document.querySelectorAll('.f-btn');
+    const cardsContainer = document.getElementById('grid');
+    const emptyMessage = document.getElementById('empty-message');
+    const sortSelect = document.getElementById('sort-order');
+    let activeFilters = new Set(['all']);
+
+    // --- FILTER LOGICA ---
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.dataset.filter;
+            if (filter === 'all') {
+                activeFilters.clear();
+                activeFilters.add('all');
+                buttons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            } else {
+                activeFilters.delete('all');
+                const allBtn = document.querySelector('[data-filter="all"]');
+                if(allBtn) allBtn.classList.remove('active');
+                
+                if (activeFilters.has(filter)) {
+                    activeFilters.delete(filter);
+                    btn.classList.remove('active');
+                } else {
+                    activeFilters.add(filter);
+                    btn.classList.add('active');
+                }
+            }
+            if (activeFilters.size === 0) {
+                activeFilters.add('all');
+                const allBtn = document.querySelector('[data-filter="all"]');
+                if(allBtn) allBtn.classList.add('active');
+            }
+            updateDisplay();
+        });
+    });
+
+    function updateDisplay() {
+        const cards = Array.from(document.querySelectorAll('.card'));
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const categories = Array.from(card.classList);
+            const shouldShow = activeFilters.has('all') || 
+                               Array.from(activeFilters).some(f => categories.includes(f));
+            
+            if (shouldShow) {
+                card.style.display = 'block';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 10);
+                visibleCount++;
+            } else {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => { card.style.display = 'none'; }, 400);
+            }
+        });
+
+        if(emptyMessage) {
+            emptyMessage.style.display = (visibleCount === 0) ? 'block' : 'none';
+        }
     }
-  }
-}
-   const buttons = document.querySelectorAll('.f-btn');
-const grid = document.getElementById('grid');
-let activeFilters = new Set(['all']);
-buttons.forEach(btn => {
-btn.addEventListener('click', () => {
-const filter = btn.dataset.filter;
-if (filter === 'all') {
-activeFilters.clear();
-activeFilters.add('all');
-buttons.forEach(b => b.classList.remove('active'));
-btn.classList.add('active');
-} else {
-activeFilters.delete('all');
-document.querySelector('[data-filter="all"]').classList.remove('active');
-if (activeFilters.has(filter)) {
-activeFilters.delete(filter);
-btn.classList.remove('active');
-} else {
-activeFilters.add(filter);
-btn.classList.add('active');
-}
 
-}
-if (activeFilters.size === 0) {
-activeFilters.add('all');
-document.querySelector('[data-filter="all"]').classList.add('active');
-}
-render();
-});
-});
-function render() {
-const cards = Array.from(document.querySelectorAll('.card'));
-cards.forEach(card => {
-const categories = Array.from(card.classList);
-const match = activeFilters.has('all') ||
-Array.from(activeFilters).some(f => categories.includes(f));
-card.style.display = match ? 'block' : 'none';
-});
-}
+    // --- SORTEER LOGICA ---
+    if(sortSelect) {
+        sortSelect.addEventListener('change', () => {
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const isNewest = sortSelect.value === 'newest';
+
+            cards.sort((a, b) => {
+                const dateA = new Date(a.dataset.date || 0);
+                const dateB = new Date(b.dataset.date || 0);
+                return isNewest ? dateB - dateA : dateA - dateB;
+            });
+
+            cards.forEach(card => cardsContainer.appendChild(card));
+        });
+    }
+
+    // --- REVEAL ON SCROLL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    // Deze regel was je vergeten en is cruciaal voor de animaties:
+    document.querySelectorAll('.card').forEach(card => observer.observe(card));
 </script>
+
 </body>
 </html>
