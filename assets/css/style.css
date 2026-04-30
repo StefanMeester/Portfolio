@@ -481,3 +481,15 @@ opacity: 0; transition: 0.3s;
 color: white; font-weight: bold;
 }
 .card:hover .overlay { opacity: 1; }
+#portfolio-section {
+    margin-top: 100px; /* Pas dit getal aan aan de hoogte van je navigatiebalk */
+    padding-top: 20px;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px; /* Extra ruimte onder je titel "Projecten" */
+}
